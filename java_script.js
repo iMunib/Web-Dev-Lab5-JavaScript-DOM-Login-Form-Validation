@@ -11,29 +11,27 @@ let resetButton = document.getElementById("reset-button");
 
 // function to validate the email address entered by the user with reg expression for format
 function EmailValidation() {
-  let email1 = email.value;
-  let regexp = /\S+@\S+\.\S+/; 
-  if (regexp.test(email1)) {
+  let emailvalue = email.value;
+  let regexp = /\S+@\S+\.\S+/;
+  if (regexp.test(emailvalue)) {
     CurrentStatus = "true";
   } else {
     CurrentStatus = "false";
   }
   return CurrentStatus;
 }
-
 
 // Checking if the value for username is less than 20 and not empty
 function LoginValidation() {
-  let login1 = login.value;
-  let length = login1.length; 
-  if (length > 20 || login1 == "") {
+  let loginValue = login.value;
+  let length = loginValue.length;
+  if (length > 20 || loginValue == "") {
     CurrentStatus = "false";
   } else {
     CurrentStatus = "true";
   }
   return CurrentStatus;
 }
-
 
 // Function to check if the user has checked the terms and conditions and newsletter checkbox
 function TermsValidation() {
@@ -45,28 +43,27 @@ function TermsValidation() {
   return CurrentStatus;
 }
 
-
 //Function to validate the password entered by the user
 function PasswordValidation() {
-  let pass1 = FirstPassword.value;
+  let firstPasswordValue = FirstPassword.value;
   passUppercase = "";
   passLowercase = "";
-  for (var i = 0; i < pass1.length; i++) {
-    let char = pass1[i];
-    c = char.toUpperCase();
-    if (c == char) {
+  for (var i = 0; i < firstPasswordValue.length; i++) {
+    let characterOfPassword = firstPasswordValue[i];
+    c = characterOfPassword.toUpperCase();
+    if (c == characterOfPassword) {
       passUppercase = "true";
     }
-    c = char.toLowerCase();
-    if (c == char) {
+    c = characterOfPassword.toLowerCase();
+    if (c == characterOfPassword) {
       passLowercase = "true";
     }
   }
   if (
     passLowercase === "true" &&
     passUppercase === "true" &&
-    pass1.length >= 6 &&
-    pass1 != ""
+    firstPasswordValue.length >= 6 &&
+    firstPasswordValue != ""
   ) {
     CurrentStatus = "True";
   } else {
@@ -77,8 +74,8 @@ function PasswordValidation() {
 
 //Function to validate the second password entered by the user matches the first password
 function PasswordValidation2() {
-  let pass_2 = SecondPassword.value;
-  if (pass_2 == FirstPassword.value && pass_2 != "") {
+  let secondPasswordValue = SecondPassword.value;
+  if (secondPasswordValue == FirstPassword.value && secondPasswordValue != "") {
     CurrentStatus = "true";
   } else {
     CurrentStatus = "false";
@@ -91,7 +88,6 @@ function SpamAlert() {
   alert("Be alert from Spams");
 }
 
-
 // Function to remove the error message when pressing reset button
 function resetButtonPressed() {
   const allSpan = document.querySelectorAll("span");
@@ -103,76 +99,75 @@ resetButton.addEventListener("click", resetButtonPressed);
 
 // Function to validate the form and using the functions above to validate the form
 function validate() {
-  //validating email address
+  //validating email address and removing warning so they dont stack
   let emailValidation = EmailValidation();
-  var liElements = document.querySelectorAll(".ewarning");
-  if (liElements.length > 0) {
-    document.querySelector(".ewarning").remove();
+  var insertedElement = document.querySelectorAll(".warningemail");
+  if (insertedElement.length > 0) {
+    document.querySelector(".warningemail").remove();
   }
+
   if (emailValidation == "false") {
     MessageShowing =
-      "X Email address should be non-empty with the format xyz@xyz.xyz";
+      "Email address should be not empty with the format like xyz@xyz.xyz";
     let emailError = document.createElement("span");
-    emailError.setAttribute("class", "ewarning");
+    emailError.setAttribute("class", "warningemail");
     document.querySelectorAll(".main-form-email")[0].append(emailError);
     emailError.textContent = MessageShowing;
   }
 
-  //validating login and removing warning
-  var liElements = document.querySelectorAll(".bwarning");
-  if (liElements.length > 0) {
-    document.querySelector(".bwarning").remove();
+  //validating login and removing warning so they dont stack
+  var insertedElement = document.querySelectorAll(".warningLogin");
+  if (insertedElement.length > 0) {
+    document.querySelector(".warningLogin").remove();
   }
   let loginValidation = LoginValidation();
   if (loginValidation == "false") {
-    MessageShowing = "X login should be non-empty,and within 20 characters long";
+    MessageShowing =
+      "Login should be not-empty and smaller than 20 characters long";
     let loginError = document.createElement("span");
-    loginError.setAttribute("class", "bwarning");
+    loginError.setAttribute("class", "warningLogin");
     document.querySelectorAll(".main-form-username")[0].append(loginError);
     loginError.textContent = MessageShowing;
-    console.log(MessageShowing);
   }
-  var liElements = document.querySelectorAll(".cwarning");
-  if (liElements.length > 0) {
-    document.querySelector(".cwarning").remove();
+  var insertedElement = document.querySelectorAll(".warningFirstPassword");
+  if (insertedElement.length > 0) {
+    document.querySelector(".warningFirstPassword").remove();
   }
-  //validating password
+  //validating the password and removing warning so they dont stack
   let passValidation = PasswordValidation();
   if (passValidation == "false") {
     MessageShowing =
-      "X password should be atleast 6 characters; 1 Uppercase, 1 Lowercase";
-    let PassError = document.createElement("span");
-    PassError.setAttribute("class", "cwarning");
-    document.querySelectorAll(".main-form-firstpassword")[0].append(PassError);
-    PassError.textContent = MessageShowing;
+      "Password should be atleast 6 characters; 1 Uppercase, 1 Lowercase";
+    let ErrorForPassword = document.createElement("span");
+    ErrorForPassword.setAttribute("class", "warningFirstPassword");
+    document.querySelectorAll(".main-form-firstpassword")[0].append(ErrorForPassword);
+    ErrorForPassword.textContent = MessageShowing;
   }
-  var liElements = document.querySelectorAll(".d2warning");
-  if (liElements.length > 0) {
-    document.querySelector(".d2warning").remove();
+  var insertedElement = document.querySelectorAll(".warningsecondPassword");
+  if (insertedElement.length > 0) {
+    document.querySelector(".warningsecondPassword").remove();
   }
-  //validating second pass
-  let pass2Validation = PasswordValidation2();
-  if (pass2Validation == "false") {
-    MessageShowing = "X please retype password.";
-    let PassError = document.createElement("span");
-    PassError.setAttribute("class", "d2warning");
-    document.querySelectorAll(".main-form-secondpassword")[0].append(PassError);
-    PassError.textContent = MessageShowing;
-    console.log(MessageShowing);
+  //validating second password and removing warning so they dont stack
+  let secondPassValidation = PasswordValidation2();
+  if (secondPassValidation == "false") {
+    MessageShowing = "Please retype password.";
+    let ErrorforPass2 = document.createElement("span");
+    ErrorforPass2.setAttribute("class", "warningsecondPassword");
+    document.querySelectorAll(".main-form-secondpassword")[0].append(ErrorforPass2);
+    ErrorforPass2.textContent = MessageShowing;
   }
-  var liElements = document.querySelectorAll(".last");
-  if (liElements.length > 0) {
+  var insertedElement = document.querySelectorAll(".last");
+  if (insertedElement.length > 0) {
     document.querySelector(".last").remove();
   }
-  //validating terms
+  //validating terms and removing warning so they dont stack
   let termValidation = TermsValidation();
-  console.log("no");
+
   if (termValidation == "false") {
-    MessageShowing = "X please accept the terms and conditions.";
+    MessageShowing = "Please accept the terms and conditions.";
     let termError = document.createElement("span");
     termError.setAttribute("class", "last");
     document.querySelectorAll(".main-form-terms")[0].append(termError);
     termError.textContent = MessageShowing;
-    console.log(MessageShowing);
   }
 }
