@@ -114,7 +114,7 @@ function validate() {
       "X Email address should be non-empty with the format xyz@xyz.xyz";
     let emailError = document.createElement("span");
     emailError.setAttribute("class", "ewarning");
-    document.querySelectorAll(".form-group")[0].append(emailError);
+    document.querySelectorAll(".main-form-email")[0].append(emailError);
     emailError.textContent = MessageShowing;
   }
 
@@ -128,7 +128,7 @@ function validate() {
     MessageShowing = "X login should be non-empty,and within 20 characters long";
     let loginError = document.createElement("span");
     loginError.setAttribute("class", "bwarning");
-    document.querySelectorAll(".form-group1")[0].append(loginError);
+    document.querySelectorAll(".main-form-username")[0].append(loginError);
     loginError.textContent = MessageShowing;
     console.log(MessageShowing);
   }
@@ -143,7 +143,7 @@ function validate() {
       "X password should be atleast 6 characters; 1 Uppercase, 1 Lowercase";
     let PassError = document.createElement("span");
     PassError.setAttribute("class", "cwarning");
-    document.querySelectorAll(".form-group2")[0].append(PassError);
+    document.querySelectorAll(".main-form-firstpassword")[0].append(PassError);
     PassError.textContent = MessageShowing;
   }
   var liElements = document.querySelectorAll(".d2warning");
@@ -156,7 +156,7 @@ function validate() {
     MessageShowing = "X please retype password.";
     let PassError = document.createElement("span");
     PassError.setAttribute("class", "d2warning");
-    document.querySelectorAll(".form-group3")[0].append(PassError);
+    document.querySelectorAll(".main-form-secondpassword")[0].append(PassError);
     PassError.textContent = MessageShowing;
     console.log(MessageShowing);
   }
@@ -171,7 +171,7 @@ function validate() {
     MessageShowing = "X please accept the terms and conditions.";
     let termError = document.createElement("span");
     termError.setAttribute("class", "last");
-    document.querySelectorAll(".form-group5")[0].append(termError);
+    document.querySelectorAll(".main-form-terms")[0].append(termError);
     termError.textContent = MessageShowing;
     console.log(MessageShowing);
   }
